@@ -42,6 +42,7 @@ def _readFile(converters: list[Convertion], filename: str) -> list[Transaction]:
 
     transactions = []
 
+    logging.info("=" * 50)
     logging.info(f"Reading Transactions from: '{filename}'")
 
     with open(filename, newline="") as csvfile:

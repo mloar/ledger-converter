@@ -95,4 +95,8 @@ class Accounts:
 
                 identifier_parts.pop()
 
+        # When DEFAULT_UNKOWN is used I need to save it and possibly add an ALIAS for it
+        logger = logging.getLogger(__name__)
+        logger.info(identifier)
+
         return f"{accountType}:{self.DEFAULT_UNKNOWN}"
