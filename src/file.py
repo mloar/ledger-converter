@@ -7,6 +7,7 @@ from src.config import ACCOUNTS_FILE, ALIASES_FILE, INPUT_FOLDER, OUTPUT_FILENAM
 from src.conversions.conversion import Conversion
 from src.conversions.creditCardConversion import CreditCardConversion
 from src.conversions.statementConversion import StatementConversion
+from src.conversions.wintrustConversion import WintrustConversion
 from src.transaction import Transaction
 
 
@@ -63,7 +64,7 @@ def getTransactions() -> list[Transaction]:
     """
 
     accounts = Accounts(ACCOUNTS_FILE, ALIASES_FILE)
-    converters = [StatementConversion(accounts), CreditCardConversion(accounts)]
+    converters = [StatementConversion(accounts), CreditCardConversion(accounts), WintrustConversion(accounts)]
     logging.debug(
         f"List of Converters: {[obj.__class__.__name__ for obj in converters]}",
     )
