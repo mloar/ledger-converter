@@ -4,7 +4,7 @@ from csv import DictReader
 from src.transaction import Transaction
 
 
-class Convertion(ABC):
+class Conversion(ABC):
 
     @abstractmethod
     def canConvert(self, heading: str) -> bool:

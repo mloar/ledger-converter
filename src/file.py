@@ -4,17 +4,17 @@ import os
 
 from src.accounts import Accounts
 from src.config import ACCOUNTS_FILE, ALIASES_FILE, INPUT_FOLDER, OUTPUT_FILENAME
-from src.convertions.convertion import Convertion
-from src.convertions.creditCardConvertion import CreditCardConvertion
-from src.convertions.statementConvertion import StatementConvertion
+from src.conversions.conversion import Conversion
+from src.conversions.creditCardConversion import CreditCardConversion
+from src.conversions.statementConversion import StatementConversion
 from src.transaction import Transaction
 
 
 logging = logging.getLogger(__name__)
 
 
-def _chooseConvertion(
-    converters: list[Convertion],
+def _chooseConversion(
+    converters: list[Conversion],
     csv_reader: csv.DictReader,
 ) -> list[Transaction]:
     """
@@ -32,7 +32,8 @@ def _chooseConvertion(
             return converter.convert(csv_headings, csv_reader)
 
 
-def _readFile(converters: list[Convertion], filename: str) -> list[Transaction]:
+
+def _readFile(converters: list[Conversion], filename: str) -> list[Transaction]:
     """
     Get transactions from 'filename' using one of the 'converters'
 
@@ -47,7 +48,7 @@ def _readFile(converters: list[Convertion], filename: str) -> list[Transaction]:
 
     with open(filename, newline="") as csvfile:
         csv_reader = csv.reader(csvfile, delimiter=",", quotechar='"')
-        transactions.extend(_chooseConvertion(converters, csv_reader))
+        transactions.extend(_chooseConversion(converters, csv_reader))
 
     return transactions
 
@@ -61,7 +62,7 @@ def getTransactions() -> list[Transaction]:
     """
 
     accounts = Accounts(ACCOUNTS_FILE, ALIASES_FILE)
-    converters = [StatementConvertion(accounts), CreditCardConvertion(accounts)]
+    converters = [StatementConversion(accounts), CreditCardConversion(accounts)]
     logging.debug(
         f"List of Converters: {[obj.__class__.__name__ for obj in converters]}",
     )

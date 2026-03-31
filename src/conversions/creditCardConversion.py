@@ -1,11 +1,11 @@
 from csv import DictReader
 
 from src.accounts import Accounts
-from src.convertions.convertion import Convertion
+from src.conversions.conversion import Conversion
 from src.transaction import Transaction
 
 
-class CreditCardConvertion(Convertion):
+class CreditCardConversion(Conversion):
 
     HEADER = ["Posted Date", "Reference Number", "Payee", "Address", "Amount"]
 
@@ -13,7 +13,7 @@ class CreditCardConvertion(Convertion):
         self.account = accounts
 
     def canConvert(self, heading: str) -> bool:
-        return heading == CreditCardConvertion.HEADER
+        return heading == CreditCardConversion.HEADER
 
     def convert(
         self,
