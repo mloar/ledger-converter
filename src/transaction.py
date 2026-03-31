@@ -13,7 +13,11 @@ class Transaction:
     ):
 
         format = "%m/%d/%Y"
-        datetime_str = datetime.datetime.strptime(date, format)
+        try:
+            datetime_str = datetime.datetime.strptime(date, format)
+        except ValueError:
+            format = "%Y-%m-%d"
+            datetime_str = datetime.datetime.strptime(date, format)
 
         self.date = datetime_str
         self.description = description
