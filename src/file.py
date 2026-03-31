@@ -31,6 +31,7 @@ def _chooseConversion(
         if converter.canConvert(csv_headings):
             return converter.convert(csv_headings, csv_reader)
 
+    raise Exception("Unsupported CSV format")
 
 
 def _readFile(converters: list[Conversion], filename: str) -> list[Transaction]:
